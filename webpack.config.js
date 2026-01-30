@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const vssExtension = require('./vss-extension.json');
 
 module.exports = {
   entry: './src/main.tsx',
@@ -26,6 +28,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      '__APP_VERSION__': JSON.stringify(vssExtension.version)
+    }),
     new HtmlWebpackPlugin({
       template: './index.html',
       filename: 'index.html'

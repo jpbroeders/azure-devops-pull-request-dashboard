@@ -44,4 +44,4 @@ This extension is developed by FreelyIT.
 
 ## Version History
 
-- **1.1.3** - Initial version
+- **1.1.4** - Initial version

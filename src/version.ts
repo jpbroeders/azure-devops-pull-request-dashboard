@@ -1,1 +1,2 @@
-export const VERSION = '1.0.14'
+declare const __APP_VERSION__: string;
+export const VERSION = __APP_VERSION__;
