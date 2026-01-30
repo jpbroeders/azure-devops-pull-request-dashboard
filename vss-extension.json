@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json.schemastore.org/vss-extension.json",
+  "manifestVersion": 1,
+  "id": "pr-dashboard",
+  "version": "1.1.3",
+  "name": "Pull Request Dashboard",
+  "description": "Modern cross-project pull request dashboard for Azure DevOps",
+  "publisher": "freelyit",
+  "categories": ["Azure Repos"],
+  "tags": ["pull request", "dashboard", "code review", "git"],
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/jpbroeders/azure-devops-pull-request-dashboard"
+  },
+  "links": {
+    "home": {
+      "uri": "https://www.freelyit.nl"
+    },
+    "repository": {
+      "uri": "https://github.com/jpbroeders/azure-devops-pull-request-dashboard"
+    },
+    "issues": {
+      "uri": "https://github.com/jpbroeders/azure-devops-pull-request-dashboard/issues"
+    },
+    "support": {
+      "uri": "https://github.com/jpbroeders/azure-devops-pull-request-dashboard"
+    }
+  },
+  "content": {
+    "details": {
+      "path": "overview.md"
+    }
+  },
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "images/icon.png"
+  },
+  "scopes": [
+    "vso.code",
+    "vso.project"
+  ],
+  "contributions": [
+    {
+      "id": "pr-dashboard-hub",
+      "type": "ms.vss-web.hub",
+      "targets": [
+        "ms.vss-code-web.code-hub-group"
+      ],
+      "properties": {
+        "name": "Pull Request Dashboard",
+        "uri": "dist/index.html",
+        "icon": "images/icon.png"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "dist",
+      "addressable": true
+    },
+    {
+      "path": "images",
+      "addressable": true
+    },
+    {
+      "path": "overview.md",
+      "addressable": true
+    }
+  ]
+}

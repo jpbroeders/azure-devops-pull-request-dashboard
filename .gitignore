@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.vsix
+.env
+.env.local
+.claude/
+PUBLISHING-GUIDE.md
