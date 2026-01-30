@@ -70,6 +70,13 @@ export async function fetchProjects(): Promise<Project[]> {
 }
 
 // Mock data for development
+export function getMockProjects(): Project[] {
+  return [
+    { id: 'proj-1', name: 'Platform' },
+    { id: 'proj-2', name: 'WebApp' }
+  ]
+}
+
 export function getMockData(): { pullRequests: PullRequest[], currentUserId: string } {
   const currentUserId = 'user-1'
   

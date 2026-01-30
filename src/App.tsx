@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 import { PRDashboard } from './components/PRDashboard'
-import { fetchPullRequests, fetchProjects, getMockData, initSDK, type Project } from './services/azureDevOps'
+import { fetchPullRequests, fetchProjects, getMockData, getMockProjects, initSDK, type Project } from './services/azureDevOps'
 import type { DashboardState, PullRequest } from './types'
 
-// Check if running in Azure DevOps (iframe)
-const isAzureDevOps = window.parent !== window
+// Use webpack-injected dev mode flag
+const isDevMode = __DEV_MODE__
 
 export default function App() {
   const [state, setState] = useState<DashboardState>({
@@ -41,15 +41,17 @@ export default function App() {
 
   async function initializeApp() {
     try {
-      if (!isAzureDevOps) {
+      if (isDevMode) {
         // Dev mode - instant mock data
         const data = getMockData()
+        const mockProjects = getMockProjects()
         setState({
           pullRequests: data.pullRequests,
           currentUserId: data.currentUserId,
           loading: false,
           error: null
         })
+        setProjects(mockProjects)
         setInitialized(true)
         return
       }
@@ -81,6 +83,21 @@ export default function App() {
   }
 
   async function loadPullRequests() {
+    if (isDevMode) {
+      // Dev mode - use mock data
+      const data = getMockData()
+      let filtered = data.pullRequests
+      if (selectedProject) {
+        filtered = data.pullRequests.filter(pr => pr.repository.project.id === selectedProject.id)
+      }
+      setState(s => ({
+        ...s,
+        pullRequests: filtered,
+        loading: false
+      }))
+      return
+    }
+
     setState(s => ({ ...s, loading: true, error: null, pullRequests: [] }))
     try {
       await fetchPullRequests(selectedProject, handleProgress)
