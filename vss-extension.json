@@ -2,12 +2,13 @@
   "$schema": "https://json.schemastore.org/vss-extension.json",
   "manifestVersion": 1,
   "id": "pr-dashboard",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "name": "Pull Request Dashboard",
   "description": "Modern cross-project pull request dashboard for Azure DevOps",
   "publisher": "freelyit",
   "categories": ["Azure Repos"],
   "tags": ["pull request", "dashboard", "code review", "git"],
+  "public": true,
   "repository": {
     "type": "git",
     "uri": "https://github.com/jpbroeders/azure-devops-pull-request-dashboard"
