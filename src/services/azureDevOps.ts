@@ -86,6 +86,7 @@ export function getMockData(): { pullRequests: PullRequest[], currentUserId: str
       title: 'feat: Add new authentication flow',
       description: 'Implements OAuth2 with PKCE',
       status: 'active',
+      isDraft: true,
       createdBy: { id: 'user-2', displayName: 'Alice Developer' },
       creationDate: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
       repository: { id: 'repo-1', name: 'backend-api', project: { id: 'proj-1', name: 'Platform' } },
@@ -102,6 +103,7 @@ export function getMockData(): { pullRequests: PullRequest[], currentUserId: str
       id: 1235,
       title: 'fix: Resolve memory leak in worker service',
       status: 'active',
+      isDraft: false,
       createdBy: { id: 'user-1', displayName: 'You' },
       creationDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
       repository: { id: 'repo-2', name: 'worker-service', project: { id: 'proj-1', name: 'Platform' } },
@@ -118,6 +120,7 @@ export function getMockData(): { pullRequests: PullRequest[], currentUserId: str
       id: 1236,
       title: 'chore: Update dependencies to latest versions',
       status: 'active',
+      isDraft: false,
       createdBy: { id: 'user-3', displayName: 'Bob Reviewer' },
       creationDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
       repository: { id: 'repo-3', name: 'frontend-app', project: { id: 'proj-2', name: 'WebApp' } },
@@ -133,6 +136,7 @@ export function getMockData(): { pullRequests: PullRequest[], currentUserId: str
       id: 1237,
       title: 'feat: Implement dark mode support',
       status: 'active',
+      isDraft: true,
       createdBy: { id: 'user-4', displayName: 'Carol Lead' },
       creationDate: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
       repository: { id: 'repo-3', name: 'frontend-app', project: { id: 'proj-2', name: 'WebApp' } },
@@ -149,6 +153,7 @@ export function getMockData(): { pullRequests: PullRequest[], currentUserId: str
       id: 1238,
       title: 'refactor: Extract shared components to library',
       status: 'active',
+      isDraft: false,
       createdBy: { id: 'user-2', displayName: 'Alice Developer' },
       creationDate: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(),
       repository: { id: 'repo-4', name: 'ui-components', project: { id: 'proj-2', name: 'WebApp' } },
@@ -174,6 +179,7 @@ interface PRResponse {
   pullRequestId: number
   title: string
   description?: string
+  isDraft?: boolean
   createdBy: { id: string; displayName: string; imageUrl?: string }
   creationDate: string
   sourceRefName: string
@@ -208,6 +214,7 @@ async function fetchProjectPRs(
             title: pr.title,
             description: pr.description,
             status: 'active',
+            isDraft: pr.isDraft || false,
             createdBy: {
               id: pr.createdBy.id,
               displayName: pr.createdBy.displayName,

@@ -3,6 +3,7 @@ export interface PullRequest {
   title: string
   description?: string
   status: 'active' | 'completed' | 'abandoned'
+  isDraft: boolean
   createdBy: {
     id: string
     displayName: string

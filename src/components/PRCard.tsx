@@ -52,6 +52,24 @@ const useStyles = makeStyles({
     backgroundColor: '#ffebee',
     color: '#c62828',
   },
+  draftBadge: {
+    backgroundColor: '#fff8e1',
+    color: '#f57c00',
+    fontWeight: '600',
+    fontSize: '11px',
+    textTransform: 'uppercase' as const,
+    letterSpacing: '0.5px',
+  },
+  prNumber: {
+    color: tokens.colorNeutralForeground3,
+    fontWeight: '500',
+    fontSize: '12px',
+  },
+  headerLeft: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: tokens.spacingHorizontalS,
+  },
   title: {
     fontSize: '16px',
     fontWeight: '600',
@@ -175,11 +193,19 @@ export function PRCard({ pr, currentUserId }: Props) {
       onClick={() => window.open(pr.webUrl, '_blank')}
     >
       <div className={styles.header}>
-        <Badge appearance="filled" className={styles.projectBadge}>
-          {pr.repository.project.name}
-        </Badge>
-        <Badge 
-          appearance="filled" 
+        <div className={styles.headerLeft}>
+          <Badge appearance="filled" className={styles.projectBadge}>
+            {pr.repository.project.name}
+          </Badge>
+          <span className={styles.prNumber}>#{pr.id}</span>
+          {pr.isDraft && (
+            <Badge appearance="filled" className={styles.draftBadge}>
+              Draft
+            </Badge>
+          )}
+        </div>
+        <Badge
+          appearance="filled"
           className={age.isStale ? styles.staleBadge : styles.ageBadge}
         >
           {age.text}
